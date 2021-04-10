@@ -1,4 +1,3 @@
 angular-frontend/node_modules
 nodejs-backend/node_modules
-nodejs-backend/config/.env
-nodejs-backend/config/config.js
+nodejs-backend/config
