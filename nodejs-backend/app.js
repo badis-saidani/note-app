@@ -1,5 +1,5 @@
 const express = require('express');
-const config = require('./config/config');
+//const config = require('./config/config');
 
 const MongoClient = require("mongodb").MongoClient;
 // you can use here config.DB_CONNECTION to connect to DB in the cloud atlas instead of local DB
