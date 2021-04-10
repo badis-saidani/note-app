@@ -1,5 +1,9 @@
 const express = require('express');
+const config = require('./config/config');
+
 const MongoClient = require("mongodb").MongoClient;
+// you can use here config.DB_CONNECTION to connect to DB in the cloud atlas instead of local DB
+// after we finish the project will hide the config file in .gitignore
 const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const notebook = require('./routes/notebook');
