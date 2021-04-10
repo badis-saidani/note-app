@@ -8,7 +8,7 @@ let user = {
     email: { type: String, index: true, unique: true },
     notebooks : [
         {
-            name : String,
+            name : { type: String, index: true, unique: true },
             notes : [
                 {
                     title: { type: String, index: true, unique: true },
@@ -23,8 +23,36 @@ let user = {
 
 const userSchema = new mongoose.Schema(user);
 
-userSchema.statics.findByUid = function(uid, callback){
-    return this.findOne({uid}, callback);
+userSchema.statics.getNoteBookByUid = async function(uid){
+    let user = await this.findOne({uid});    
+    let data = [];
+
+    for (let notebook of user.notebooks){
+        let item = {name: notebook.name, notes: []};        
+        for (let note of notebook.notes){
+            item.notes.push(note.title);
+        }
+        data.push(item);
+    }
+    console.log(data);
+    return data;
+}
+
+userSchema.statics.addNewNoteBook = async function(uid, notebookName){
+    let notebook = {
+        name: notebookName,
+        notes: []
+    };
+
+    //check existed before adding
+    let count = await this.findOne({uid, "notebooks.name": notebookName}).count();    
+    if (count > 0) {
+        return false;
+    }
+    else {
+        await this.updateOne({uid}, {$push: {notebooks: notebook}});
+        return true;    
+    }
 }
 
 module.exports = mongoose.model('users', userSchema);

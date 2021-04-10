@@ -2,28 +2,19 @@ const User = require('../models/user');
 
 
 //load notebook by uid
-function getNoteBooks(db, uid, callback){
-    // let cursor = db.aggregate([
-    //     {$match: {"uid": uid}},
-    //     {$project: 
-    //         {
-    //             _id: 0,
-    //            "name" : "$notebooks.name",
-    //             //"noteTitle": {$addToSet: "$notebooks.notes"}
-    //         }    
-    //     }
-    // ]);
-
-    // cursor.forEach(element => {
-    //     console.log(element);
-    // });
-
-    User.findByUid(uid, (err, user) => {
-        console.log(user);
-    });
-
-    callback();
-
+async function getNoteBooks(uid, callback){
+    let notebooks = await User.getNoteBookByUid(uid);
+    callback(notebooks);
 }
 
-module.exports = { getNoteBooks }
+async function addNoteBook(uid, name, callback){
+    let rs = await User.addNewNoteBook(uid, name);
+    if (rs){        
+        callback(201, {msg: `${name} is created`})
+    }
+    else {
+        callback(403, {msg: `${name} is existed`})
+    }    
+}
+
+module.exports = { getNoteBooks, addNoteBook }
