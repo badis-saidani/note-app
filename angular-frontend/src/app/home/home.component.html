@@ -1,0 +1,37 @@
+<!-- <header></header>
+<div class="sidebar"></div>
+<article>
+  <router-outlet></router-outlet>
+</article>
+<footer></footer> -->
+
+<header id="header">
+  <nav>
+    <ul>
+      <li>Our menu</li>
+    </ul>
+  </nav>
+</header>
+
+<aside>
+  <h2>Side bar section</h2>
+  <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+  <a [routerLink] = "['reminders']">reminders</a>
+</aside>
+<section>
+
+  <article>
+    <header>
+      <h2>Router-Outlet</h2>
+      <p>everything rendered of notebooks and reminders will be here</p>
+      <router-outlet></router-outlet>
+    </header>
+  </article>
+
+
+
+</section>
+
+
+
+
