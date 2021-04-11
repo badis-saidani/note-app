@@ -1,9 +1,12 @@
+const { ObjectId, Timestamp } = require('bson');
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/note-app', { useNewUrlParser: true });
+//mongodb://localhost:27017/note-app
+mongoose.connect('mongodb+srv://badis:badis@cluster0.xnus3.mongodb.net/mwa-project?retryWrites=true&w=majority', { useNewUrlParser: true });
 
-let user = {
-    uid: { type: String, index: true, unique: true },
+let user = { // the user should have a name
+    //uid: { type: String, index: true, unique: true },
+    name: {type: String},
     pwd: { type: String, index: true },
     email: { type: String, index: true, unique: true },
     notebooks: [
@@ -17,6 +20,16 @@ let user = {
                     updated_at: Date
                 }
             ]
+        }
+    ],
+    reminders: [
+        {
+            _id: mongoose.Types.ObjectId,
+            title: { type: String, index: true },
+            content: String,
+            set_at: Date,
+            created_at: Date,
+            updated_at: Date
         }
     ]
 };
