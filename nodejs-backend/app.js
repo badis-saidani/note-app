@@ -6,7 +6,8 @@ const MongoClient = require("mongodb").MongoClient;
 // after we finish the project will hide the config file in .gitignore
 const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const notebook = require('./routes/notebook');
+const notebookRouter = require('./routes/notebook');
+
 const authRouter = require('./routes/auth');
 
 let db;
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 
-app.use("/api", notebook.router);
+app.use("/api/notebooks", notebookRouter.router);
 app.use("/auth", authRouter);
 
 app.listen(port, () => console.log("Listening in port " + port));
