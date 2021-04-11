@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,13 +21,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forRoot(
       [
         {path: '', component: AppComponent},
-        {path: 'home', component: HomeComponent},
+        // {path: 'home', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
       ]
     ),
     NgbModule
   ],
-  providers: [],
+  providers: [AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

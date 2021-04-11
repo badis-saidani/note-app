@@ -16,6 +16,7 @@
 <aside>
   <h2>Side bar section</h2>
   <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+  <a [routerLink] = "['reminders']">reminders</a>
 </aside>
 <section>
 
@@ -23,6 +24,7 @@
     <header>
       <h2>Router-Outlet</h2>
       <p>everything rendered of notebooks and reminders will be here</p>
+      <router-outlet></router-outlet>
     </header>
   </article>
 
