@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://badis:badis@cluster0.xnus3.mongodb.net/mwa-project?retryWrites=true&w=majority', { useNewUrlParser: true });
 
 let user = { // the user should have a name
-    //uid: { type: String, index: true, unique: true },
+    uid: { type: String, index: true, unique: true },
     name: {type: String},
     pwd: { type: String, index: true },
     email: { type: String, index: true, unique: true },
@@ -96,17 +96,12 @@ userSchema.statics.updateNoteBook = async function(uid, oldName, newName){
 
 //Begin Note region
 userSchema.statics.getNoteContent = async function (uid, notebookName, noteTitle) {
+
     let notebooks = await this.findOne(
-            {uid},
-            //{_id: 0, "notebooks.$[notebookFilter].notes": {$elemMatch: {title: noteTitle}}},
+            {uid},            
             {_id: 0, "notebooks": {$elemMatch: {name: notebookName}}},
-            // {arrayFilters: [
-            //         {"notebookFilter.name": notebookName},
-            //         {"noteFilter.title": noteTitle},
-            //     ]
-            // }
         );
-    //console.log(notebooks);    
+    console.log(notebooks);    
     for (let notebook of notebooks.notebooks){
         for (let note of notebook.notes){
             if (note.title === noteTitle){
