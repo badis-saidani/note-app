@@ -41,9 +41,9 @@ app.use("/api", notebook.router);
 app.use("/auth", authRouter);
 
 // DB connection
-client.connect(() => {
-    console.log('connected to db!');
-  });
+// client.connect(() => {
+//     console.log('connected to db!');
+//   });
 
 // boot up
 app.listen(port, () => console.log("Listening in port " + port));
