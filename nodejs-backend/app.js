@@ -7,6 +7,7 @@ const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const notebook = require('./routes/notebook');
+const authRouter = require('./routes/auth');
 
 let db;
 const port = 3000;
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 
 
 app.use("/api", notebook.router);
+app.use("/auth", authRouter);
 
 app.listen(port, () => console.log("Listening in port " + port));
 
