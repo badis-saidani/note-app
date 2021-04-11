@@ -25,8 +25,9 @@ const userSchema = new mongoose.Schema(user);
 
 userSchema.statics.getNoteBookByUid = async function(uid){
     let user = await this.findOne({uid});    
-    let data = [];
+    console.log(user);
 
+    let data = [];
     for (let notebook of user.notebooks){
         let item = {name: notebook.name, notes: []};        
         for (let note of notebook.notes){
@@ -39,20 +40,42 @@ userSchema.statics.getNoteBookByUid = async function(uid){
 }
 
 userSchema.statics.addNewNoteBook = async function(uid, notebookName){
-    let notebook = {
-        name: notebookName,
-        notes: []
-    };
-
     //check existed before adding
     let count = await this.findOne({uid, "notebooks.name": notebookName}).count();    
     if (count > 0) {
         return false;
     }
     else {
+        let notebook = {
+            name: notebookName,
+            notes: []
+        };
+
         await this.updateOne({uid}, {$push: {notebooks: notebook}});
         return true;    
     }
+}
+
+
+userSchema.statics.deleteNoteBook = async function(uid, notebookName){
+    let result = await this.update(
+            {uid, "notebooks.name": notebookName},
+            {$pull: {notebooks: {name: notebookName}}}
+    );
+    console.log("In deleteNoteBook: " + result);
+    let count = result.nModified;
+    return count;
+}
+
+userSchema.statics.updateNoteBook = async function(uid, oldName, newName){
+    let result = await this.update(
+            {uid, "notebooks.name": oldName},
+            {$set: {"notebooks.$.name": newName}}
+    );
+    
+    console.log("In deleteNoteBook: " + result);
+    let count = result.nModified;
+    return count;
 }
 
 module.exports = mongoose.model('users', userSchema);

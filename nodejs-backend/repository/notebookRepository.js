@@ -17,4 +17,24 @@ async function addNoteBook(uid, name, callback){
     }    
 }
 
-module.exports = { getNoteBooks, addNoteBook }
+async function deleteNoteBook(uid, name, callback){
+    let count = await User.deleteNoteBook(uid, name);
+    if (count == 0){
+        callback(403, {msg: `Can NOT delete ${name}`});
+    }
+    else {
+        callback(200, {msg: `${name} is deleted`});
+    }
+}
+
+async function updateNoteBook(uid, oldName, newName, callback){
+    let count = await User.updateNoteBook(uid, oldName, newName);
+    if (count == 0){
+        callback(403, {msg: `Can NOT update ${oldName} to ${newName}`});
+    }
+    else {
+        callback(202, {msg: `${oldName} notebook is changed to ${newName}`});
+    }
+}
+
+module.exports = { getNoteBooks, addNoteBook, deleteNoteBook, updateNoteBook }
