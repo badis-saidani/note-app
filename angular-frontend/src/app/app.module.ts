@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
       ]
     ),
-    NgbModule
+    NgbModule,
+    AuthModule
   ],
   providers: [AuthInterceptor],
   bootstrap: [AppComponent]

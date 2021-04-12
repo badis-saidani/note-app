@@ -18,7 +18,7 @@ const secret = 'zolasproperty';
 const getJWT = function (uid) {
     const token = jwt.sign({
         uid
-    }, privateKey, { expiresIn: '1h' });
+    }, secret, { expiresIn: '1h' });
     return token;
 }
 
