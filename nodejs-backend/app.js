@@ -45,7 +45,7 @@ function errorHandler(err, req, res, next) {
 
 // routers
 app.use("/api/reminders", verifyJWT, reminderRouter);
-app.use("/api", notebookRouter.router);
+app.use("/api/notebooks", notebookRouter.router);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler);
