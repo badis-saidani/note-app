@@ -6,7 +6,8 @@ const MongoClient = require("mongodb").MongoClient;
 // after we finish the project will hide the config file in .gitignore
 //mongodb://localhost:27017
 const cors = require('cors');
-const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
+const {db_connection} = require('./config/config');
+const client = new MongoClient(db_connection, { useNewUrlParser: true, useUnifiedTopology: true });
 const { verifyJWT } = require('./middlewares/jwtVerifier')
 const reminderRouter = require('./routes/reminder');
 const notebookRouter = require('./routes/notebook');
@@ -21,20 +22,20 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-    if (!db) {
-        client.connect((err) => {
-            db = client.db('note-app');
-            req.db = db.collection('users');
-            db = req.db;
-            next();
-        })
-    }
-    else {
-        req.db = db;
-        next();
-    }
-});
+// app.use((req, res, next) => {
+//     if (!db) {
+//         client.connect((err) => {
+//             db = client.db('note-app');
+//             req.db = db.collection('users');
+//             db = req.db;
+//             next();
+//         })
+//     }
+//     else {
+//         req.db = db;
+//         next();
+//     }
+// });
 
 function errorHandler(err, req, res, next) {
     if (res.headersSent) {
@@ -50,9 +51,9 @@ app.use("/api/auth", authRouter);
 
 app.use(errorHandler);
 //DB connection
-//client.connect(() => {
-//    console.log('connected to db!');
-//  });
+client.connect(() => {
+   console.log('connected to db!');
+ });
 
 // boot up
 app.listen(port, () => console.log("Listening in port " + port));

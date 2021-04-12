@@ -1,9 +1,9 @@
+import { StorageService } from './storage.service';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -34,7 +34,7 @@ import { AuthModule } from './auth/auth.module';
     DemoMaterialModule,
     AuthModule
   ],
-  providers: [AuthInterceptor],
+  providers: [AuthInterceptor, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
