@@ -11,10 +11,10 @@ let user = { // the user should have a name
     email: { type: String, index: true, unique: true },
     notebooks: [
         {
-            name: { type: String, index: true, unique: true },
+            name: String,
             notes: [
                 {
-                    title: { type: String, index: true, unique: true },
+                    title: String,
                     content: String,
                     created_at: Date,
                     updated_at: Date
@@ -120,6 +120,10 @@ userSchema.statics.addANote = async function (uid, notebookName, newNote) {
         return false;
     }
 
+    let currTime = new Date();
+    newNote.created_at = currTime;
+    newNote.updated_at = currTime;
+
     let result = await this.updateOne(
         {uid}, 
         {$push: {"notebooks.$[notebookFilter].notes": newNote}},
@@ -138,7 +142,8 @@ userSchema.statics.updateNote = async function (uid, notebookName, noteTitle, ne
             {$set: 
                 {
                     "notebooks.$[notebookFilter].notes.$[noteFilter].title": newNote.title,
-                    "notebooks.$[notebookFilter].notes.$[noteFilter].content": newNote.content
+                    "notebooks.$[notebookFilter].notes.$[noteFilter].content": newNote.content,
+                    "notebooks.$[notebookFilter].notes.$[noteFilter].updated_at": new Date()
                 }
             },
             {arrayFilters: [

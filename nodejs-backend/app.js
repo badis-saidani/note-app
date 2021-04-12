@@ -7,7 +7,7 @@ const MongoClient = require("mongodb").MongoClient;
 //mongodb://localhost:27017
 const cors = require('cors');
 const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-const {verifyJWT} = require('./middlewares/jwtVerifier')
+const { verifyJWT } = require('./middlewares/jwtVerifier')
 const reminderRouter = require('./routes/reminder');
 const notebookRouter = require('./routes/notebook');
 const authRouter = require('./routes/auth');
@@ -20,10 +20,9 @@ const app = express();
 // middlewares
 app.use(cors())
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-    if (!db){
+    if (!db) {
         client.connect((err) => {
             db = client.db('note-app');
             req.db = db.collection('users');
@@ -37,15 +36,23 @@ app.use((req, res, next) => {
     }
 });
 
+function errorHandler(err, req, res, next) {
+    if (res.headersSent) {
+        return next(err)
+    }
+    res.status(500).send({ error: err });
+}
+
 // routers
 app.use("/api/reminders", verifyJWT, reminderRouter);
-app.use("/api", notebookRouter.router);
-app.use("/auth", authRouter);
+app.use("/api/notebooks", notebookRouter.router);
+app.use("/api/auth", authRouter);
 
- //DB connection
- //client.connect(() => {
- //    console.log('connected to db!');
- //  });
+app.use(errorHandler);
+//DB connection
+//client.connect(() => {
+//    console.log('connected to db!');
+//  });
 
 // boot up
 app.listen(port, () => console.log("Listening in port " + port));

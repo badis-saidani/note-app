@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { DemoMaterialModule } from './material-module';
     ),
     NgbModule,
     BrowserAnimationsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    AuthModule
   ],
   providers: [AuthInterceptor],
   bootstrap: [AppComponent]
