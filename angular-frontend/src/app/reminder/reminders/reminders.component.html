@@ -1,12 +1,12 @@
 <p>reminders works!</p>
 <div>
-  <ul *ngIf="(reminders$ | async)?.reminders.length; else loading" >
-    <li *ngFor="let r of (reminders$ | async)?.reminders" >
-      {{r.title}}
+  <div *ngIf="(reminders$ | async)?.reminders.length; else loading" >
+    <div *ngFor="let r of (reminders$ | async)?.reminders"  >
+      <!-- (click)="navigateTo(r)" -->
       <!-- <span (click)="onNavigate(u)"></span> -->
-      <!-- <a [routerLink]="[u.login.uuid]" [state]="u">{{u.name.first}} {{u.name.last}}</a> -->
-    </li>
-  </ul>
+      <a [routerLink]="[r._id]" [state]="r">{{r.title}}</a>
+    </div>
+  </div>
 </div>
 
 <ng-template #loading>

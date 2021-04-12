@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RemindersComponent } from './reminders/reminders.component';
 import { ReminderDetailsComponent } from './reminder-details/reminder-details.component';
+import { DemoMaterialModule } from '../material-module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const reminderRoute: Routes = [
   {path: '', component: RemindersComponent},
@@ -19,6 +21,8 @@ const reminderRoute: Routes = [
   ],
   imports: [
     CommonModule,
+    DemoMaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(reminderRoute)
   ],
   providers: [ReminderService]
