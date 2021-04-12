@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 
 const TOKEN_HEADER_KEY = 'x-access-token';
 
-@Injectable()
+@Injectable(
+    {providedIn: 'root'}
+)
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor() { }

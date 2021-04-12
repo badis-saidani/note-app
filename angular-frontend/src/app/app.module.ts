@@ -3,12 +3,15 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { AuthModule } from './auth/auth.module';
       ]
     ),
     NgbModule,
+    BrowserAnimationsModule,
+    DemoMaterialModule,
     AuthModule
   ],
   providers: [AuthInterceptor],
