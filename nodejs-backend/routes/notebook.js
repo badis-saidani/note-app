@@ -3,9 +3,9 @@ const router = require('express').Router();
 const notebookRepo = require('../repository/notebookRepository');
 const nodeRepository = require('../repository/noteRepository');
 
-router.get("/", autheticateByJWT, async (req, res) => {
+router.get("/", async (req, res) => {
     let uid = req.jwt.uid;
-
+    console.log(uid);
     setImmediate(() => {
         notebookRepo.getNoteBooks(uid, (result) => {
             res.json(result);
@@ -14,7 +14,7 @@ router.get("/", autheticateByJWT, async (req, res) => {
     });
 });
 
-router.post("/", autheticateByJWT, async (req, res) => {
+router.post("/", async (req, res) => {
     let uid = req.jwt.uid;
     setImmediate(() => {
         notebookRepo.addNoteBook(uid, req.body.name, (status, msg) => {
@@ -24,7 +24,7 @@ router.post("/", autheticateByJWT, async (req, res) => {
 });
 
 
-router.delete("/:name", autheticateByJWT, async (req, res) => {
+router.delete("/:name", async (req, res) => {
     let uid = req.jwt.uid;
     setImmediate(() => {
         notebookRepo.deleteNoteBook(uid, req.params.name, (status, msg) => {
@@ -33,7 +33,7 @@ router.delete("/:name", autheticateByJWT, async (req, res) => {
     });    
 });
 
-router.patch("/:name", autheticateByJWT, async (req, res) => {
+router.patch("/:name", async (req, res) => {
     let uid = req.jwt.uid;
     setImmediate(() => {
         notebookRepo.updateNoteBook(uid, req.params.name, req.body.name, (status, msg) => {
@@ -45,7 +45,7 @@ router.patch("/:name", autheticateByJWT, async (req, res) => {
 
 //notes in side a notebook
 // api/notebooks/:notebookName/notes/:title
-router.get('/:notebookName/notes/:title', autheticateByJWT, async (req, res)  => {
+router.get('/:notebookName/notes/:title', async (req, res)  => {
     let uid = req.jwt.uid;
 
     setImmediate(() => {
@@ -55,7 +55,7 @@ router.get('/:notebookName/notes/:title', autheticateByJWT, async (req, res)  =>
     });
 });
 
-router.post('/:notebookName/notes', autheticateByJWT, async (req, res)  => {
+router.post('/:notebookName/notes', async (req, res)  => {
     let uid = req.jwt.uid;
 
     setImmediate(() => {
@@ -66,7 +66,7 @@ router.post('/:notebookName/notes', autheticateByJWT, async (req, res)  => {
 });
 
 
-router.patch('/:notebookName/notes/:title', autheticateByJWT, async (req, res)  => {
+router.patch('/:notebookName/notes/:title', async (req, res)  => {
     let uid = req.jwt.uid;    
 
     setImmediate(() => {
@@ -76,7 +76,7 @@ router.patch('/:notebookName/notes/:title', autheticateByJWT, async (req, res)  
     });
 });
 
-router.delete('/:notebookName/notes/:title', autheticateByJWT, async (req, res)  => {
+router.delete('/:notebookName/notes/:title', async (req, res)  => {
     let uid = req.jwt.uid;
     
     setImmediate(() => {
@@ -89,9 +89,9 @@ router.delete('/:notebookName/notes/:title', autheticateByJWT, async (req, res) 
 
 
 
-function autheticateByJWT(req, res, next){
-    req.jwt = {uid: "andy"};
-    return next();
-}
+// function autheticateByJWT(req, res, next){
+//     req.jwt = {uid: "andy"};
+//     return next();
+// }
 
 module.exports = { router };

@@ -182,7 +182,7 @@ userSchema.statics.getUserByUid = async function (uid) {
 }
 
 userSchema.statics.createUser = async function(uid, email, hashedPwd) {
-    return this.create({ uid, email, pwd: hashedPwd, notebooks: [] });
+    return this.create({ uid, email, pwd: hashedPwd, notebooks: [{name: 'master', notes: []}] });
 }
 
 module.exports = mongoose.model('users', userSchema);

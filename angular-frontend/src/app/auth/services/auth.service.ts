@@ -6,7 +6,7 @@ import { tap } from "rxjs/operators";
   providedIn: 'root'
 })
 export class AuthService {
-  private token: string;
+  public token: string;
 
   public userInfo: {
     username: string,

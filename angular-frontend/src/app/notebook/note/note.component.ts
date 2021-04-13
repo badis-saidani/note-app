@@ -82,7 +82,7 @@ export class NoteComponent implements OnInit {
   }
 
   saveNote(){
-    if (this.currentNote === null){ //add new
+    if (!this.currentNote){ //add new
       let payload = this.getInputNote();
       this.noteService.addNote(this.currentNotebook, payload).subscribe(
         res => {
