@@ -25,7 +25,27 @@
   <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
   <a [routerLink] = "['reminders']">reminders</a>
 
-  <p><a [routerLink] = "['notes']">My Notes</a></p>
+
+    
+  <div>    
+    <div mat-line>My Notebooks</div>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let notebook of notebooks">
+          <a  mat-line [routerLink] = "['notes']"
+              [queryParams]="{notebook: notebook.name}"
+              [state]="{notebook: notebook.name}">{{notebook.name}}</a>
+        </mat-list-option>
+
+        <form>
+          <mat-form-field hintLabel="Max 20 characters">
+            <mat-label>Add new notebook</mat-label>
+            <input matInput placeholder="Ex. Study Angular" maxlength="20" #inputNotebook>            
+          </mat-form-field>          
+        </form>
+        <button mat-raised-button color="primary" (click)="addNotebook()">Add</button>
+    </mat-selection-list>
+    
+  </div>
   
   </mat-drawer>
   <mat-drawer-content>

@@ -25,4 +25,10 @@ export class NotebookService {
       .pipe(map((res: any) => res));
   }
 
+  addNoteBook(payload: object){
+    let endPoint = this.domain + "/notebooks";
+    return this.http.post(endPoint, payload, this.buildHeader())
+      .pipe(map((res: any) => res));
+  }
+
 }

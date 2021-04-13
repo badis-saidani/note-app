@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NoteService } from '../note.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -11,8 +11,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class NoteComponent implements OnInit {
 
-  currentNotebook: string;
-  currentNote: string;
+  private currentNotebook: string;
+  private currentNote: string;
 
   noteTitles: Array<string>;
   noteItem;
@@ -21,11 +21,29 @@ export class NoteComponent implements OnInit {
   @ViewChild('inputContent') inputContent : ElementRef;
 
 
-  constructor(private renderer:  Renderer2, 
+  constructor(
+            private _activatedRoute: ActivatedRoute,
+            private router: Router,
+            private renderer:  Renderer2, 
             private noteService: NoteService,
-            private dialog: MatDialog)             
-  {
-    this.currentNotebook = "master";
+            )
+  {  
+    try {
+      this.currentNotebook = this.router.getCurrentNavigation().extras.state.notebook;
+    }
+    catch(ex){
+      this.currentNotebook = "master";
+    }
+    console.log("this.currentNotebook: " + this.currentNotebook);
+
+    _activatedRoute.queryParams.subscribe(
+      params => {
+        this.currentNotebook = params['notebook'];
+        console.log('queryParams', this.currentNotebook);
+        this.getAllNotes();
+      }
+    );
+
     this.noteItem = null;
   }
 
@@ -33,7 +51,7 @@ export class NoteComponent implements OnInit {
     this.getAllNotes();
   }
 
-  getAllNotes(){
+  getAllNotes(){    
     this.noteService.getNotes().subscribe(
       res => {
         let notebook = res.find(ele => ele.name == this.currentNotebook);
