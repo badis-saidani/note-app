@@ -3,12 +3,14 @@ import { NoteService } from '../note.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
+
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css']
 })
 export class NoteComponent implements OnInit {
+
   currentNotebook: string;
   currentNote: string;
 
