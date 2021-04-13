@@ -9,7 +9,7 @@ import { NotebookService } from '../notebook/notebook.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  username;
   notebooks;
 
   @ViewChild('inputNotebook') inputNotebook : ElementRef;  
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('inside home');
+    this.username = this.auth.userInfo.username;
     this.loadNotebooks();
   }
 
