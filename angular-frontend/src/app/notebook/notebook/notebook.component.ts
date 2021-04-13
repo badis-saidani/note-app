@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-notebook',
+  selector: 'notebooks',
   templateUrl: './notebook.component.html',
   styleUrls: ['./notebook.component.css']
 })
 export class NotebookComponent implements OnInit {
   
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

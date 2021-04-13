@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
 import { RegisterComponent } from './auth/components/register/register.component';
+import { NotebookModule } from './notebook/notebook.module';
 
 
 @NgModule({
@@ -26,7 +27,6 @@ import { RegisterComponent } from './auth/components/register/register.component
       [
         {path: '', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
-
         {path: 'notes', loadChildren: () => import('./notebook/notebook.module').then(m=>m.NotebookModule)},
       ]
     ),

@@ -65,13 +65,10 @@ export class NoteComponent implements OnInit {
                   this.handleError(err)
                 }
               );
-
-    
   }
 
   createNote(){
     this.currentNote = null;
-    console.log("create Note");
     this.resetInputInnerHTML(this.inputTitle);
     this.resetInputInnerHTML(this.inputContent);
   }
@@ -82,8 +79,13 @@ export class NoteComponent implements OnInit {
   }
 
   saveNote(){
+    let payload = this.getInputNote();
+    if (payload.title.length <= 0 || payload.title.content <= 0){
+      return;
+    }
+
     if (!this.currentNote){ //add new
-      let payload = this.getInputNote();
+      
       this.noteService.addNote(this.currentNotebook, payload).subscribe(
         res => {
           this.refeshDataAfterUpsert(res, payload.title);
@@ -92,7 +94,8 @@ export class NoteComponent implements OnInit {
       );
     }
     else { //update
-      let payload = this.getInputNote();
+      if (!this.openDialog(`Do you want to update ${this.currentNote} note?`)) return;
+
       this.noteService.updateNote(this.currentNotebook, this.currentNote, payload).subscribe(
         res => {
           this.refeshDataAfterUpsert(res, payload.title);
@@ -110,6 +113,7 @@ export class NoteComponent implements OnInit {
 
   deleteNote(){
     if (this.currentNote == null) return;
+    if (!this.openDialog(`Do you want to delete ${this.currentNote} note?`)) return;
 
     this.noteService.deleteNote(this.currentNotebook, this.currentNote).subscribe(
       res => {
@@ -122,53 +126,12 @@ export class NoteComponent implements OnInit {
 
   }
 
-  openDialog(message: string): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: message
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log("result: " + result);
-    });
-  }
-
-  
-
-}
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-@Component({
-  selector: 'confirm-dialog',
-  template: `    
-    <div mat-dialog-content>
-      <p>{{data}}</p>      
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Cancel</button>
-      <button mat-button>Ok</button>
-    </div>
-  `
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
-      console.dir(data);
-      console.dir("data: " + data);
-    }
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  openDialog(message: string) : boolean {
+    return confirm(message);
   }
 
 }
+
+
+
 
