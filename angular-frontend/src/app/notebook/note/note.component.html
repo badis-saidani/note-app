@@ -1,20 +1,20 @@
 <div id="notes-container">
 
     <mat-grid-list cols="12" rowHeight="100px">
-        <mat-grid-tile [colspan]="3" [rowspan]="2" id="notes-title" [style.background]="color1">
+        <mat-grid-tile [colspan]="3" [rowspan]="2" id="notes-title">
             <div>
                 <mat-card-title>Notes</mat-card-title> 
                 <hr/>
                 <div *ngFor="let title of noteTitles">
                     <button mat-button color="basic" (click)="getNoteContent(title)">
-                        <mat-icon>note</mat-icon> - {{title}}
+                        <mat-icon>note</mat-icon> {{title}}
                     </button>
                     
                 </div>
             </div>
         </mat-grid-tile>
 
-        <mat-grid-tile  [colspan]="9" [rowspan]="4" [style.background]="color2">
+        <mat-grid-tile  [colspan]="9" [rowspan]="4">
             <form class="note-form">
                 <button mat-raised-button color="basic" (click)="createNote()">Create New Note</button>
                 <button mat-raised-button color="primary" (click)="saveNote()">Save</button>
