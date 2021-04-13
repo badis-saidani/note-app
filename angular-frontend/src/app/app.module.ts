@@ -27,6 +27,8 @@ import { AuthModule } from './auth/auth.module';
         {path: '', component: AppComponent},
         // {path: 'home', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
+
+        {path: 'notes', loadChildren: () => import('./notebook/notebook.module').then(m=>m.NotebookModule)},
       ]
     ),
     NgbModule,

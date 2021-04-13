@@ -42,7 +42,7 @@ userSchema.statics.getNoteBookByUid = async function (uid) {
     let data = [];
 
     for (let notebook of user.notebooks) {
-        let item = { name: notebook.name, notes: [] };
+        let item = { id: notebook._id, name: notebook.name, notes: [] };
         for (let note of notebook.notes) {
             item.notes.push(note.title);
         }
@@ -98,10 +98,10 @@ userSchema.statics.updateNoteBook = async function(uid, oldName, newName){
 userSchema.statics.getNoteContent = async function (uid, notebookName, noteTitle) {
 
     let notebooks = await this.findOne(
-            {uid},            
+            {uid},
             {_id: 0, "notebooks": {$elemMatch: {name: notebookName}}},
         );
-    console.log(notebooks);    
+    console.log(notebooks);
     for (let notebook of notebooks.notebooks){
         for (let note of notebook.notes){
             if (note.title === noteTitle){
