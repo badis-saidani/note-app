@@ -51,4 +51,17 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  deleteNotebook(notebookName){
+    let c = confirm(`Do you want to delete Notebook ${notebookName}`);
+    if (c){
+      this.notebookService.deleteNoteBook(notebookName).subscribe(
+        data => {
+          console.log(data);
+          this.loadNotebooks();
+        },
+        err => console.log(err)
+      )
+    }
+  }
+
 }

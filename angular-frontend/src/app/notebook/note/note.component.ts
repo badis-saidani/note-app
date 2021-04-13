@@ -11,8 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NoteComponent implements OnInit {
 
-  private currentNotebook: string;
-  private currentNote: string;
+  currentNotebook: string;
+  currentNote: string;
 
   noteTitles: Array<string>;
   noteItem;
@@ -36,7 +36,7 @@ export class NoteComponent implements OnInit {
     }
     console.log("this.currentNotebook: " + this.currentNotebook);
 
-    _activatedRoute.queryParams.subscribe(
+    this._activatedRoute.queryParams.subscribe(
       params => {
         this.currentNotebook = params['notebook'];
         console.log('queryParams', this.currentNotebook);

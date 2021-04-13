@@ -31,4 +31,10 @@ export class NotebookService {
       .pipe(map((res: any) => res));
   }
 
+  deleteNoteBook(name){
+    let endPoint = this.domain + "/notebooks/" + name;
+    return this.http.delete(endPoint, this.buildHeader())
+      .pipe(map((res: any) => res));
+  }
+
 }
