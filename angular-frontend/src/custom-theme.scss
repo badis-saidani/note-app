@@ -32,7 +32,7 @@ $angular-frontend-theme: mat-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 // Define an alternate dark theme.
-$dark-primary: mat-palette($mat-blue-grey);
+$dark-primary: mat-palette($mat-blue);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
 $dark-warn:    mat-palette($mat-deep-orange);
 $dark-theme:   mat-dark-theme((

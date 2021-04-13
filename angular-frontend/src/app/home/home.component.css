@@ -27,6 +27,17 @@ header#header{
   margin-left: 30%;
 }
 
+#welcomeLogo{
+  width: 50px;
+  height: 50px;
+}
+
+mat-toolbar{
+  background-image: url("../../assets/img/plume-sm.png") ;
+  background-position-y: center;
+  background-repeat: repeat-x;
+}
+
 .pointer {cursor: pointer;}
 
 

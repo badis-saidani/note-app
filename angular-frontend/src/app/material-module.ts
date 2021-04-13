@@ -36,6 +36,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
@@ -79,7 +84,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     OverlayModule,
     PortalModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ]
 })
 export class DemoMaterialModule {}

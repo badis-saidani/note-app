@@ -15,6 +15,7 @@ import { map } from 'rxjs/operators';
 })
 export class ReminderDetailsComponent implements OnInit {
 
+  setTime;
   reminder;
   option: 'new' | 'update';
   reminderForm: FormGroup;
@@ -40,9 +41,10 @@ export class ReminderDetailsComponent implements OnInit {
         created_at: Date.now(),
         updated_at: Date.now()
       }
+
     }
 
-
+    this.setTime = this.reminder.set_at;
     this.reminderForm = this.fb.group({
       title: [this.reminder.title, Validators.required],
       content: this.reminder?.content
@@ -72,9 +74,9 @@ export class ReminderDetailsComponent implements OnInit {
 
   }
 
-
   setReminderTimeAt(event: MatDatepickerInputEvent<Date>) {
     // this.reminderForm.setValue(['set_at'], event.value)  ;
+    console.log('change date: ', event.value);
     this.reminder.set_at = event.value;
   }
 
