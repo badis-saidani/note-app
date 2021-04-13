@@ -57,6 +57,7 @@ export class AuthService {
   public signOut() {
     this.token = null;
     localStorage.removeItem('token');
+    this.userInfo = null;
   }
 
 }
