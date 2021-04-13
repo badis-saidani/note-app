@@ -23,6 +23,6 @@ export class ReminderService {
     return this.http.post(this.baseUrl, reminder, {headers: {'x-access-token':this.accessToken}});
   }
   updateReminder(id:string, reminder: any){
-    return this.http.post(`${this.baseUrl}/${id}`, reminder);
+    return this.http.post(`${this.baseUrl}/${id}`, reminder, {headers: {'x-access-token':this.accessToken}});
   }
 }

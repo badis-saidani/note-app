@@ -1,3 +1,4 @@
+import { StorageService } from './../../storage.service';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +18,7 @@ export class ReminderDetailsComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) { 
+  constructor(private router: Router, private fb: FormBuilder, private storage: StorageService) {
 
     this.reminder = this.router.getCurrentNavigation().extras.state;
     console.log(this.reminder);
@@ -26,12 +27,14 @@ export class ReminderDetailsComponent implements OnInit {
     //   hideRequired: this.hideRequiredControl,
     //   floatLabel: this.floatLabelControl,
     // });
-    
+
   }
 
   ngOnInit(): void {
     console.log('in details');
-    
+    console.log(this.storage.getCurrentUserInfo());
+
+
     this.firstFormGroup = this.fb.group({
       firstCtrl: ['', Validators.required]
     });
