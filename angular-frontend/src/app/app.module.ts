@@ -1,4 +1,3 @@
-import { StorageService } from './storage.service';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
+import { RegisterComponent } from './auth/components/register/register.component';
 
 
 @NgModule({
@@ -25,7 +25,6 @@ import { AuthModule } from './auth/auth.module';
     RouterModule.forRoot(
       [
         {path: '', component: AppComponent},
-        // {path: 'home', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
       ]
     ),
@@ -34,7 +33,7 @@ import { AuthModule } from './auth/auth.module';
     DemoMaterialModule,
     AuthModule
   ],
-  providers: [AuthInterceptor, StorageService],
+  providers: [AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

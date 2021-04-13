@@ -1,8 +1,8 @@
-import { StorageService } from './../../storage.service';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-reminder-details',
@@ -18,7 +18,7 @@ export class ReminderDetailsComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private storage: StorageService) {
+  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) {
 
     this.reminder = this.router.getCurrentNavigation().extras.state;
     console.log(this.reminder);
@@ -32,7 +32,7 @@ export class ReminderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('in details');
-    console.log(this.storage.getCurrentUserInfo());
+    console.log(this.auth.getCurrentUserInfo());
 
 
     this.firstFormGroup = this.fb.group({

@@ -22,15 +22,33 @@ const getJWT = function (uid) {
     return token;
 }
 
-function autheticateByJWT(req, res, next) {
-    const token = req.jwt;
+async function autheticateByJWT(req, res, next) {
+    const token = req.header('x-access-token');
     try {
-        const decoded = jwt.verify(token, secret);
-        req.jwt = decoded;
-        next();
+        if (token) {
+            const decoded = jwt.verify(token, secret);
+            const user = await getUserByUid(decoded.uid);
+            if (user) {
+                req.jwt = decoded;
+                req.user = user;
+                next();
+            }
+            else {
+                res.status(403).send({ error: "Not authenticated" });
+            }
+        }
+        else {
+            res.status(403).send({ error: "Not authenticated" });
+        }
     } catch (err) {
         next(err);
     }
+}
+
+async function getUserByUid(uid) {
+    const user = await User.getUserByUid(uid);
+    console.log(user);
+    return user;
 }
 
 async function userRegister({ username, email, password }) {
@@ -44,7 +62,11 @@ async function userLogin({ username, password }) {
 
     if (user && await comparePassword(password, user.pwd)) {
         const token = getJWT(user.uid);
-        return token;
+        return {
+            username: user.uid,
+            email: user.email,
+            token
+        };
     }
     else {
         throw new Error('Invalid Username or Password');
@@ -53,4 +75,4 @@ async function userLogin({ username, password }) {
 
 
 
-module.exports = { userRegister, userLogin, autheticateByJWT }
+module.exports = { userRegister, userLogin, autheticateByJWT, getUserByUid }

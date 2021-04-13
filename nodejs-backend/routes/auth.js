@@ -2,11 +2,20 @@ const router = require('express').Router();
 const authRepository = require('../repository/authRepository');
 
 
+router.get('/', authRepository.autheticateByJWT, async (req, res, next) => {
+    try {
+        res.json({ username: req.user.uid, email: req.user.email });
+    }
+    catch (err) {
+        next(err.message);
+    }
+})
+
 router.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
-        const token = await authRepository.userLogin({ username, password });
-        res.json(token);
+        const userInfo = await authRepository.userLogin({ username, password });
+        res.json(userInfo);
     }
     catch (err) {
         next(err.message);
