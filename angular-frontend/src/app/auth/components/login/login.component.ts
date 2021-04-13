@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,10 +13,12 @@ export class LoginComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  isLogged = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-
+    this.isLogged = this.authService.isLogin()
   }
 
 

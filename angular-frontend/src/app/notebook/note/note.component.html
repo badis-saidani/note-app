@@ -1,44 +1,35 @@
-<div id="notes-container">
+<div class="container">
+    <div class="row">
+        <div class="col-4" id="notes-title" >
+            <mat-card-title>Notes</mat-card-title>
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let note of noteTitles" (click)="getNoteContent(note)">
+                  <mat-icon mat-list-icon>note</mat-icon>
+                  <div mat-line>{{note}}</div>
+                </mat-list-option>
+            </mat-selection-list>
 
-    <mat-grid-list cols="12" rowHeight="100px">
-        <mat-grid-tile [colspan]="3" [rowspan]="2" id="notes-title">
-            <div>
-                <mat-card-title>Notes</mat-card-title> 
-                <hr/>
-                <div *ngFor="let title of noteTitles">
-                    <button mat-button color="basic" (click)="getNoteContent(title)">
-                        <mat-icon>note</mat-icon> {{title}}
-                    </button>
-                    
-                </div>
-            </div>
-        </mat-grid-tile>
+        </div>
 
-        <mat-grid-tile  [colspan]="9" [rowspan]="4">
+        <div class="col-8">
             <form class="note-form">
                 <button mat-raised-button color="basic" (click)="createNote()">Create New Note</button>
                 <button mat-raised-button color="primary" (click)="saveNote()">Save</button>
-                <button mat-raised-button color="warn" (click)="deleteNote()">Delete</button>    
-
+                <button mat-raised-button color="warn" (click)="deleteNote()">Delete</button>
+                <hr/>
                 <mat-form-field class="note-full-width" hintLabel="Max 50 characters" appearance="outline">
                     <mat-label>Note Title</mat-label>
-                    <input matInput #inputTitle maxlength="50"
-                            placeholder="Ex. Submit Homework At" 
-                            value="{{noteItem?.title}}">
+                    <input matInput #inputTitle maxlength="50" placeholder="Ex. Submit Homework At"
+                        value="{{noteItem?.title}}">
                     <mat-hint align="end"></mat-hint>
-                </mat-form-field>                    
-    
+                </mat-form-field>
+
                 <mat-form-field class="note-full-width" appearance="fill">
                     <mat-label>Note Content</mat-label>
-                    <textarea rows="15" matInput #inputContent
-                            value="{{noteItem?.content}}">                        
-                    </textarea>
+                    <textarea rows="15" matInput #inputContent value="{{noteItem?.content}}">
+                </textarea>
                 </mat-form-field>
-            </form>                                            
-        </mat-grid-tile>
-
-    </mat-grid-list>
-
+            </form>
+        </div>
+    </div>
 </div>
-
-

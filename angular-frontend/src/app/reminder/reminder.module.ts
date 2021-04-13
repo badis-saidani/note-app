@@ -8,9 +8,10 @@ import { ReminderDetailsComponent } from './reminder-details/reminder-details.co
 import { DemoMaterialModule } from '../material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AuthGuard } from '../utils/auth.guard';
 
 const reminderRoute: Routes = [
-  {path: '', component: RemindersComponent},
+  {path: '', component: RemindersComponent, canActivate: [AuthGuard]},
   {path: ':id', component: ReminderDetailsComponent},
 
 ];

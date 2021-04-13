@@ -63,6 +63,7 @@ async function userLogin({ username, password }) {
     if (user && await comparePassword(password, user.pwd)) {
         const token = getJWT(user.uid);
         return {
+            uid: user._id,
             username: user.uid,
             email: user.email,
             token

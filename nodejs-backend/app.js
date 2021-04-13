@@ -49,7 +49,7 @@ function errorHandler(err, req, res, next) {
 //app.use("/api", authRepository.autheticateByJWT);
 
 // routers
-app.use("/api/reminders", verifyJWT, reminderRouter);
+app.use("/api/reminders", authRepository.autheticateByJWT, reminderRouter);
 app.use("/api/notebooks", authRepository.autheticateByJWT, notebookRouter.router);
 app.use("/api/auth", authRouter);
 

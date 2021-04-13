@@ -10,16 +10,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   username;
-  constructor(private storage: StorageService, private auth: AuthService) { }
+  constructor(private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     console.log('inside home');
-    this.username = this.storage.getCurrentUserInfo().username;
+    this.username = this.auth.userInfo.username;
 
   }
 
   logout() {
     this.auth.signOut();
+    this.router.navigate(['/']); //move to home after logout
   }
 
 }

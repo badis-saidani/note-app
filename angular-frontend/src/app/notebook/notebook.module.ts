@@ -8,9 +8,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { DemoMaterialModule } from '../material-module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from '../utils/auth.guard';
 
 const notebookRoute: Routes = [
-  {path: '', component: NoteComponent},
+  {path: '', component: NoteComponent, canActivate: [AuthGuard]
+
+  },
 ];
 
 @NgModule({
@@ -26,6 +29,7 @@ const notebookRoute: Routes = [
     MatSidenavModule,
     HttpClientModule,
     RouterModule.forChild(notebookRoute)
-  ]
+  ],
+  exports: [NotebookComponent]
 })
 export class NotebookModule { }

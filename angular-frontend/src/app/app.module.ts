@@ -11,10 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { RegisterComponent } from './auth/components/register/register.component';
 import { StorageService } from './storage.service';
 import { LoginComponent } from './auth/components/login/login.component';
 import { AuthService } from './auth/services/auth.service';
+import { RegisterComponent } from './auth/components/register/register.component';
+import { NotebookModule } from './notebook/notebook.module';
 
 
 @NgModule({
@@ -28,11 +29,10 @@ import { AuthService } from './auth/services/auth.service';
     HttpClientModule,
     RouterModule.forRoot(
       [
-
-        {path: '', component: HomeComponent},
+        {path: '', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
         {path: 'notes', loadChildren: () => import('./notebook/notebook.module').then(m=>m.NotebookModule)},
-        { path: '**', redirectTo: '' }
+        {path: '**', redirectTo:''}
 
       ]
     ),

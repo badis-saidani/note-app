@@ -4,7 +4,7 @@ const authRepository = require('../repository/authRepository');
 
 router.get('/', authRepository.autheticateByJWT, async (req, res, next) => {
     try {
-        res.json({ username: req.user.uid, email: req.user.email });
+        res.json({ uid: req.user._id, username: req.user.uid, email: req.user.email });
     }
     catch (err) {
         next(err.message);

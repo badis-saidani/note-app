@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { StorageService } from './../../storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,11 +9,18 @@ import { Injectable } from '@angular/core';
 export class ReminderService {
 
   private baseUrl = `http://localhost:3000/api/reminders`;
-  private accessToken = 'badissaidani';
-  private uid = "6072f471f3b966fd400f112b";
+  private accessToken;
+  private uid;
 
-  constructor(public http: HttpClient, private storage: StorageService) {
-    this.uid = storage.getCurrentUserInfo().uid;
+  constructor(public http: HttpClient, private auth: AuthService) {
+    auth.getUserInfo()
+    this.uid = auth.userInfo.uid;
+    this.accessToken = auth.token;
+    console.log(auth.userInfo);
+
+    console.log('uid: ' , this.uid);
+    console.log('accessToken: ' , this.accessToken);
+
   }
 
   getReminders(){

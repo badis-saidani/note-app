@@ -10,7 +10,7 @@
   </nav>
   <mat-divider ></mat-divider>
 
-  <div  *ngIf="(reminders$ | async)?.reminders.length; else loading" >
+  <div  *ngIf="(reminders$ | async)?.reminders?.length" >
       <mat-grid-list cols="4" rowHeight="1:1">
         <mat-grid-tile  *ngFor="let r of (reminders$ | async)?.reminders">
           <mat-card  [routerLink]="[r._id]" [state]="r" class="example-card pointer">
@@ -38,6 +38,6 @@
 
 </div>
 
-<ng-template #loading>
+<!-- <ng-template #loading>
     <div>Loading...</div>
-</ng-template>
+</ng-template> -->
