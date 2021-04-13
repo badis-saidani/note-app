@@ -1,6 +1,6 @@
-<home *ngIf="token; else loggedOut">
+<home *ngIf="auth.userInfo; else loggedOut">
 </home>
 
 <ng-template #loggedOut>
-  <!-- here we will have a redirection to authentication -->
+  <router-outlet></router-outlet>
 </ng-template>

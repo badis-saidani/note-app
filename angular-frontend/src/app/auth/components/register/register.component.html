@@ -9,7 +9,15 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input [(ngModel)]="password" type="password" name="password" id="inputPassword" class="form-control"
         placeholder="Password" required>
+    <label for="inputConfirmPassword" class="sr-only">Password</label>
+    <input [(ngModel)]="confirmPassword" type="password" name="confirmPassword" id="inputConfirmPassword" class="form-control"
+        placeholder="Confirm Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <div class="mt-3 text-right">
+        <a [routerLink]="['/']">
+            Sign in
+        </a>
+    </div>
     <ngb-alert *ngIf="errorMessage" class="mt-2" type="danger" (closed)="alertClose()">{{ errorMessage }}</ngb-alert>
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
 </form>

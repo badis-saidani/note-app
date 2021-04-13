@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,34 +6,37 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit {
 
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 
-  errorSubscription: Subscription;
   errorMessage: string;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.errorSubscription = this.authService.errorEvent.subscribe(error => {
-      this.errorMessage = error.error;
-    })
+
   }
 
 
   onSubmit() {
-    const token = this.authService.register(this.username, this.email, this.password);
+    this.alertClose();
+    if (this.password === this.confirmPassword) {
+      this.authService.register(this.username, this.email, this.password).subscribe(() => {
+      }, error => {
+        this.errorMessage = error.error.error;
+      });
+    }
+    else {
+      this.errorMessage = "Please make sure your passwords match."
+    }
   }
 
   alertClose() {
     this.errorMessage = null;
-  }
-
-  ngOnDestroy() {
-    this.errorSubscription.unsubscribe();
   }
 
 }

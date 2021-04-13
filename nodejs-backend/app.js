@@ -13,6 +13,8 @@ const reminderRouter = require('./routes/reminder');
 const notebookRouter = require('./routes/notebook');
 const authRouter = require('./routes/auth');
 
+const authRepository = require('./repository/authRepository')
+
 // init
 let db;
 const port = 3000;
@@ -44,9 +46,11 @@ function errorHandler(err, req, res, next) {
     res.status(500).send({ error: err });
 }
 
+//app.use("/api", authRepository.autheticateByJWT);
+
 // routers
 app.use("/api/reminders", verifyJWT, reminderRouter);
-app.use("/api/notebooks", notebookRouter.router);
+app.use("/api/notebooks", authRepository.autheticateByJWT, notebookRouter.router);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler);
