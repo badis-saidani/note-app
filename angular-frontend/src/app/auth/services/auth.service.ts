@@ -60,4 +60,8 @@ export class AuthService {
     this.userInfo = null;
   }
 
+  public isLogin(){
+    return (this.token != null);
+  }
+
 }
