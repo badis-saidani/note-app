@@ -17,7 +17,7 @@ export class NoteService {
     let endPoint = this.domain + "/notebooks";
     console.log("Fetching: " + endPoint);
 
-    return this.http.get(endPoint, this.buildHeader())
+    return this.http.get(endPoint)
       .pipe(map((res: any) => res));
   }
 
@@ -26,25 +26,25 @@ export class NoteService {
     let endPoint = this.domain + "/notebooks/" + notebookName + "/notes/" + noteTitle;
     console.log("Fetching: " + endPoint);
 
-    return this.http.get(endPoint, this.buildHeader())
+    return this.http.get(endPoint)
         .pipe(map((res: any) => res));
 
   }
 
-  buildHeader(){
-    return { headers: { 
-              'x-access-token': this.authService.token, 
-              'Content-Type': 'application/json' 
-              }
-          };
-  }
+  // buildHeader(){
+  //   // return { headers: { 
+  //   //           'x-access-token': this.authService.token, 
+  //   //           'Content-Type': 'application/json' 
+  //   //           }
+  //   //       };
+  // }
 
   deleteNote(notebookName: string, noteTitle: string){
     
     let endPoint = this.domain + "/notebooks/" + notebookName + "/notes/" + noteTitle;
     console.log("Delete: " + endPoint);
 
-    return this.http.delete(endPoint, this.buildHeader())
+    return this.http.delete(endPoint)
       .pipe(map((res: any) => res));
   }
 
@@ -53,7 +53,7 @@ export class NoteService {
     let endPoint = this.domain + "/notebooks/" + notebookName + "/notes";
     console.log(`Adding ${notebookName} - ${payload}`);
 
-    return this.http.post(endPoint, payload, this.buildHeader())
+    return this.http.post(endPoint, payload)
               .pipe(map((res: any) => res));
 
   }
@@ -63,7 +63,7 @@ export class NoteService {
     let endPoint = this.domain + "/notebooks/" + notebookName + "/notes/" + noteTitle;
     console.log(`Updating ${notebookName} - ${payload}`);
 
-    return this.http.patch(endPoint, payload, this.buildHeader())
+    return this.http.patch(endPoint, payload)
               .pipe(map((res: any) => res));
   }
 
