@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { StorageService } from './../storage.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'home',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  username;
+  constructor(private storage: StorageService) { }
 
   ngOnInit(): void {
     console.log('inside home');
+    this.username = this.storage.getCurrentUserInfo().username;
 
   }
 

@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
     DemoMaterialModule,
     AuthModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AuthInterceptor, StorageService],
   bootstrap: [AppComponent]
 })

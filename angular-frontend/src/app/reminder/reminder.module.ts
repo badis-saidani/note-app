@@ -7,6 +7,7 @@ import { RemindersComponent } from './reminders/reminders.component';
 import { ReminderDetailsComponent } from './reminder-details/reminder-details.component';
 import { DemoMaterialModule } from '../material-module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const reminderRoute: Routes = [
   {path: '', component: RemindersComponent},
@@ -25,6 +26,7 @@ const reminderRoute: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(reminderRoute)
   ],
-  providers: [ReminderService]
+  providers: [ReminderService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ReminderModule { }

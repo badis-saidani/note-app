@@ -7,6 +7,7 @@ export class StorageService {
 
   private currentUserInfo = {
     token: 'badissaidani',
+    uid: '6072f471f3b966fd400f112b',
     username: 'Badis SAIDANI',
     email: 'bsaidani@miu.edu'
   }
