@@ -4,7 +4,9 @@ const User = require('../models/user');
 
 module.exports.getReminders = async function (req, res) {
     try{
-        const reminders = await User.findById(req.params.uid).select({"reminders":1});
+        const reminders = await User.findById(req.params.uid)
+        .select({"reminders":1});
+        reminders.reminders.sort(function(r1, r2) { return r2.updated_at - r1.updated_at; });
         res.json(reminders)
     } catch (err) {
         res.json({message: err});

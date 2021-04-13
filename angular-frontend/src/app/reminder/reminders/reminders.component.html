@@ -1,14 +1,43 @@
-<p>reminders works!</p>
-<div>
-  <div *ngIf="(reminders$ | async)?.reminders.length; else loading" >
-    <div *ngFor="let r of (reminders$ | async)?.reminders"  >
-      <!-- (click)="navigateTo(r)" -->
-      <!-- <span (click)="onNavigate(u)"></span> -->
-      <a [routerLink]="[r._id]" [state]="r">{{r.title}}</a>
-    </div>
+
+<div class="example-large-box mat-elevation-z4">
+
+  <nav id="header">
+      <button (click)="createNew()"  mat-raised-button color="accent">
+        <mat-icon>create</mat-icon> new
+      </button>
+
+
+  </nav>
+  <mat-divider ></mat-divider>
+
+  <div  *ngIf="(reminders$ | async)?.reminders?.length" >
+      <mat-grid-list cols="4" rowHeight="1:1">
+        <mat-grid-tile  *ngFor="let r of (reminders$ | async)?.reminders">
+          <mat-card  [routerLink]="[r._id]" [state]="r" class="example-card pointer">
+            <!-- <mat-icon (click)="delete(r)"  style="float: right;" aria-hidden="false" aria-label="Example home icon" color="warn">delete</mat-icon> -->
+            <button #trash (click)="delete(r, $event)" style="float: right;" mat-mini-fab color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <mat-card-header >
+              <mat-card-title>
+                {{r.title}}
+              </mat-card-title>
+              <mat-card-subtitle>{{r.set_at | date:'M/d/yy, h:mm a'}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content >
+              <img id="calendar" mat-card-image
+              src="https://cdn1.iconfinder.com/data/icons/calendar-20/200/calendar_5-512.png">
+            </mat-card-content>
+
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
   </div>
+
 </div>
 
-<ng-template #loading>
+<!-- <ng-template #loading>
     <div>Loading...</div>
-</ng-template>
+</ng-template> -->

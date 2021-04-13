@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { StorageService } from './../../storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -7,10 +9,19 @@ import { Injectable } from '@angular/core';
 export class ReminderService {
 
   private baseUrl = `http://localhost:3000/api/reminders`;
-  private accessToken = 'badissaidani';
-  private uid = "6072f471f3b966fd400f112b";
+  private accessToken;
+  private uid;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, private auth: AuthService) {
+    auth.getUserInfo()
+    this.uid = auth.userInfo.uid;
+    this.accessToken = auth.token;
+    console.log(auth.userInfo);
+
+    console.log('uid: ' , this.uid);
+    console.log('accessToken: ' , this.accessToken);
+
+  }
 
   getReminders(){
     return this.http.get<[]>(`${this.baseUrl}/${this.uid}`, {headers: {'x-access-token':this.accessToken}});
@@ -20,9 +31,14 @@ export class ReminderService {
   }
 
   addReminder(reminder: any){
-    return this.http.post(this.baseUrl, reminder, {headers: {'x-access-token':this.accessToken}});
+    return this.http.post(`${this.baseUrl}/${this.uid}`, reminder, {headers: {'x-access-token':this.accessToken}});
   }
   updateReminder(id:string, reminder: any){
-    return this.http.post(`${this.baseUrl}/${id}`, reminder, {headers: {'x-access-token':this.accessToken}});
+    return this.http.patch(`${this.baseUrl}/${this.uid}/${id}`, reminder, {headers: {'x-access-token':this.accessToken}});
   }
+
+  deleteReminder(id:string){
+    return this.http.delete(`${this.baseUrl}/${this.uid}/${id}`,  {headers: {'x-access-token':this.accessToken}});
+  }
+
 }

@@ -1,23 +1,43 @@
 /* *{
-  border: 1px solid red;
+  padding-left: 8px;
 } */
 
+mat-toolbar>span{
+  margin: auto
+}
 mat-drawer-container{
   height: 1000px;
 }
 
 mat-drawer{
   width: 300px;
-  /* height: 1000px; */
-  /* float: left; */
-  /* position: relative ; */
-  border: 1px solid red;
-  /* clear: right; */
+  padding-left: 8px;
 }
 
 header#header{
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+  background-color: rgb(65, 65, 71);
   height: 50px;
 }
+
+#logo{
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  margin-left: 30%;
+}
+
+#welcomeLogo{
+  width: 50px;
+  height: 50px;
+}
+
+mat-toolbar{
+  background-image: url("../../assets/img/plume-sm.png") ;
+  background-position-y: center;
+  background-repeat: repeat-x;
+}
+
+.pointer {cursor: pointer;}
 
 

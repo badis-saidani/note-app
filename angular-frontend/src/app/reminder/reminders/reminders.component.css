@@ -3,3 +3,29 @@
 li{
   text-decoration-line: none;
 }
+
+mat-card{
+  margin-left: 5px;
+  width: 90%;
+  height: 90%;
+}
+.example-large-box {
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+
+nav#header > button {
+/* float: right; */
+margin-bottom: 5px;
+}
+
+#calendar{
+  margin-left: 25%;
+  width:100px;
+   height:100px;
+}
+
+.pointer {cursor: pointer;}
+

@@ -1,67 +1,32 @@
-<!-- <header></header>
-<div class="sidebar"></div>
-<article>
-  <router-outlet></router-outlet>
-</article>
-<footer></footer> -->
+<mat-toolbar>
+  <span>Welcome Dear {{username}}</span>
+</mat-toolbar>
 
-<header id="header">
-  <nav>
-    <ul>
-      <li>Our menu</li>
-      <li><button (click)="logout()">logout</button></li>
-    </ul>
-  </nav>
-</header>
 
-<!-- <aside>
-  <h2>Side bar section</h2>
-  <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-  <a [routerLink] = "['reminders']">reminders</a>
-</aside> -->
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
-    <h2>Side bar section</h2>
-  <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-  <a [routerLink] = "['reminders']">reminders</a>
+   <div>
+     <img id="logo" src="https://cdn.jim-nielsen.com/ios/512/awesome-note-2012-05-24.png">
+   </div>
+   <mat-list>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pointer" [routerLink] = "['reminders']">
+      <mat-icon mat-list-icon>alarm</mat-icon>
+      Reminders
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pointer" [routerLink] = "['notes']">
+      <mat-icon mat-list-icon>note</mat-icon>
+      Notes
+    </mat-list-item>
+  </mat-list>
 
+  <button style="margin-top: 50%; margin-left: 25%;" (click)="logout()" mat-raised-button color="primary">
+    <mat-icon>power_settings_new</mat-icon> logout</button>
 
-    
-  <div>    
-    <div mat-line>My Notebooks</div>
-    <mat-selection-list [multiple]="false">
-        <mat-list-option *ngFor="let notebook of notebooks">
-          <a  mat-line [routerLink] = "['notes']"
-              [queryParams]="{notebook: notebook.name}"
-              [state]="{notebook: notebook.name}">{{notebook.name}}</a>
-        </mat-list-option>
-
-        <form>
-          <mat-form-field hintLabel="Max 20 characters">
-            <mat-label>Add new notebook</mat-label>
-            <input matInput placeholder="Ex. Study Angular" maxlength="20" #inputNotebook>            
-          </mat-form-field>          
-        </form>
-        <button mat-raised-button color="primary" (click)="addNotebook()">Add</button>
-    </mat-selection-list>
-    
-  </div>
-  
   </mat-drawer>
   <mat-drawer-content>
-    <section>
-
-      <article>
-        <header>
-          <h2>Router-Outlet</h2>
-          <p>everything rendered of notebooks and reminders will be here</p>
-          <router-outlet></router-outlet>
-        </header>
-      </article>
-    
-    
-    
-    </section>
+    <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
 

@@ -13,10 +13,12 @@ export class LoginComponent implements OnInit {
 
   errorMessage: string;
 
+  isLogged = false;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-
+    this.isLogged = this.authService.isLogin()
   }
 
 

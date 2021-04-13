@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $angular-frontend-primary: mat-palette($mat-blue);
-$angular-frontend-accent: mat-palette($mat-blue-gray, A200, A100, A400);
+$angular-frontend-accent: mat-palette($mat-amber, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $angular-frontend-warn: mat-palette($mat-red);
@@ -31,5 +31,29 @@ $angular-frontend-theme: mat-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($angular-frontend-theme);
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));
+
+// Define an alternate BLUE theme.
+$BLUE-primary: mat-palette($mat-indigo);
+$BLUE-accent:  mat-palette($mat-pink, A200, A100, A400);
+$BLUE-warn:    mat-palette($mat-red);
+$BLUE-theme:   mat-dark-theme((
+  color: (
+    primary: $BLUE-primary,
+    accent: $BLUE-accent,
+    warn: $BLUE-warn,
+  )
+));
+
+@include angular-material-theme($dark-theme);
 

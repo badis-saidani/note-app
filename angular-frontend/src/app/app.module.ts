@@ -10,6 +10,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { StorageService } from './storage.service';
+import { LoginComponent } from './auth/components/login/login.component';
+import { AuthService } from './auth/services/auth.service';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { NotebookModule } from './notebook/notebook.module';
 
@@ -28,6 +32,8 @@ import { NotebookModule } from './notebook/notebook.module';
         {path: '', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
         {path: 'notes', loadChildren: () => import('./notebook/notebook.module').then(m=>m.NotebookModule)},
+        {path: '**', redirectTo:''}
+
       ]
     ),
     NgbModule,
@@ -35,7 +41,8 @@ import { NotebookModule } from './notebook/notebook.module';
     DemoMaterialModule,
     AuthModule
   ],
-  providers: [AuthInterceptor],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [AuthInterceptor, StorageService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@ const authRepository = require('../repository/authRepository');
 
 router.get('/', authRepository.autheticateByJWT, async (req, res, next) => {
     try {
-        res.json({ username: req.user.uid, email: req.user.email });
+        res.json({ uid: req.user._id, username: req.user.uid, email: req.user.email });
     }
     catch (err) {
         next(err.message);
@@ -12,6 +12,7 @@ router.get('/', authRepository.autheticateByJWT, async (req, res, next) => {
 })
 
 router.post('/login', async (req, res, next) => {
+    console.log('you called me! , ', req.body);
     try {
         const { username, password } = req.body;
         const userInfo = await authRepository.userLogin({ username, password });

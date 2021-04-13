@@ -9,6 +9,7 @@ export class AuthService {
   public token: string;
 
   public userInfo: {
+    uid: string,
     username: string,
     email: string
   } = null;
@@ -22,7 +23,10 @@ export class AuthService {
     this.token = userInfo.token;
     localStorage.setItem('token', userInfo.token);
 
+
     this.userInfo = userInfo;
+    console.log('in save: ', this.userInfo);
+
   }
 
   public getCurrentUserInfo() {
@@ -35,6 +39,7 @@ export class AuthService {
       this.httpClient.get<any>('/api/auth', { headers: { 'x-access-token': this.token } })
         .subscribe((userInfo) => {
           this.userInfo = userInfo;
+          console.log('in get: ', this.userInfo);
         }, error => {
           console.error(error);
         });
