@@ -1,0 +1,17 @@
+#notes-container {
+    width: 100%;
+}
+
+#notes-title {
+    border-right: 1px solid green;
+}
+
+.note-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.note-full-width {
+    width: 100%;
+}

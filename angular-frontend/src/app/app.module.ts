@@ -26,6 +26,8 @@ import { RegisterComponent } from './auth/components/register/register.component
       [
         {path: '', component: AppComponent},
         {path: 'reminders', loadChildren: () => import('./reminder/reminder.module').then(m=>m.ReminderModule)},
+
+        {path: 'notes', loadChildren: () => import('./notebook/notebook.module').then(m=>m.NotebookModule)},
       ]
     ),
     NgbModule,
