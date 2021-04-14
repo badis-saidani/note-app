@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   confirmPassword: string;
 
   errorMessage: string;
+  successMessage: string;
 
   constructor(private authService: AuthService) { }
 
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
     this.alertClose();
     if (this.password === this.confirmPassword) {
       this.authService.register(this.username, this.email, this.password).subscribe(() => {
+        this.successMessage = "Succesfully registered. Sign in, Please";
       }, error => {
         this.errorMessage = error.error.error;
       });
@@ -37,6 +39,7 @@ export class RegisterComponent implements OnInit {
 
   alertClose() {
     this.errorMessage = null;
+    this.successMessage = null;
   }
 
 }
