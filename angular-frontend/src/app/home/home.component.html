@@ -19,14 +19,14 @@
 
 
     <mat-list-item class="pointer">
-      <mat-icon mat-list-icon>book</mat-icon> Notebooks            
+      <mat-icon mat-list-icon>book</mat-icon> Notebooks
     </mat-list-item>
 
     <mat-list style="margin-left:30px;">
       <div *ngFor="let notebook of notebooks">
           <mat-list-item class="pointer">
-            <mat-icon mat-list-icon>addition</mat-icon>   
-            <a mat-line [routerLink]="['notes']" 
+            <mat-icon mat-list-icon>addition</mat-icon>
+            <a mat-line [routerLink]="['notes']"
               [queryParams]="{notebook: notebook.name}"
                 [state]="{notebook: notebook.name}">{{notebook.name}}</a>
 
@@ -48,10 +48,10 @@
           <input matInput placeholder="Ex. Study Angular" maxlength="20" #inputNotebook>
         </mat-form-field>
       </form>
-      <button mat-raised-button color="primary" (click)="addNotebook()">Add</button>      
+      <button mat-raised-button color="primary" (click)="addNotebook()">Add</button>
     </mat-list>
 
-  </mat-list>  
+  </mat-list>
 
   <button style="margin-top: 50%; margin-left: 25%;" (click)="logout()" mat-raised-button color="primary">
     <mat-icon>power_settings_new</mat-icon> logout</button>

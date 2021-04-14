@@ -24,21 +24,21 @@ export class ReminderService {
   }
 
   getReminders(){
-    return this.http.get<[]>(`${this.baseUrl}/${this.uid}`, {headers: {'x-access-token':this.accessToken}});
+    return this.http.get<[]>(`${this.baseUrl}/${this.uid}`);
   }
   getReminderDetails(id: string){
     return this.http.get<[]>(`${this.baseUrl}/${this.uid}/${id}`);
   }
 
   addReminder(reminder: any){
-    return this.http.post(`${this.baseUrl}/${this.uid}`, reminder, {headers: {'x-access-token':this.accessToken}});
+    return this.http.post(`${this.baseUrl}/${this.uid}`, reminder);
   }
   updateReminder(id:string, reminder: any){
-    return this.http.patch(`${this.baseUrl}/${this.uid}/${id}`, reminder, {headers: {'x-access-token':this.accessToken}});
+    return this.http.patch(`${this.baseUrl}/${this.uid}/${id}`, reminder);
   }
 
   deleteReminder(id:string){
-    return this.http.delete(`${this.baseUrl}/${this.uid}/${id}`,  {headers: {'x-access-token':this.accessToken}});
+    return this.http.delete(`${this.baseUrl}/${this.uid}/${id}`);
   }
 
 }

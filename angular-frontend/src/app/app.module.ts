@@ -1,4 +1,3 @@
-import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +11,6 @@ import { DemoMaterialModule } from './material-module';
 import { AuthModule } from './auth/auth.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { StorageService } from './storage.service';
-import { LoginComponent } from './auth/components/login/login.component';
 import { AuthService } from './auth/services/auth.service';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { HeaderInterceptorService } from './utils/header-interceptor.service';
@@ -42,7 +40,7 @@ import { HeaderInterceptorService } from './utils/header-interceptor.service';
     AuthModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [AuthInterceptor, StorageService, AuthService, {
+  providers: [StorageService, AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: HeaderInterceptorService,
     multi: true

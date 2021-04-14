@@ -19,9 +19,6 @@ export class RemindersComponent implements OnInit {
    this.getReminders();
   }
 
-  ngOnDestroy() {
-    this.reminders$.unsubscribe();
-  }
   getReminders() {
     this.reminders$ = this.service.getReminders();
 
