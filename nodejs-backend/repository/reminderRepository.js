@@ -8,7 +8,6 @@ module.exports.getReminders = async function (req, res) {
         const reminders = await User.findById(req.params.uid)
         .select({"reminders":1});
         reminders.reminders.sort(function(r1, r2) { return r2.updated_at - r1.updated_at; });
-        console.log(reminders);
         res.json(reminders)
     } catch (err) {
         res.json({message: err});
@@ -31,7 +30,6 @@ module.exports.getSingleReminder = async function (req, res) {
 module.exports.addReminder = async function (req, res) {
     const uid = req.params.uid;
     const num = new ObjectId();
-    console.log('num: ', num);
     const reminder = {
         _id: num,
         ...req.body
@@ -73,8 +71,6 @@ module.exports.updateReminder = async function (req, res) {
         const reminder = await User.updateOne({_id:uid, 'reminders._id': _id}, {
             $set: {'reminders.$': {...req.body}} 
         });
-        console.log('----------------------')
-        console.log(email);
         sendEmail(email,req.body,'Update');
         res.json({success: true, message: 'reminder was updated!'});
     } catch (err) {

@@ -1,5 +1,5 @@
 const User = require('../models/user');
-
+require('dotenv/config');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
@@ -13,7 +13,7 @@ const comparePassword = function (password, passwordHash) {
     return bcrypt.compare(password, passwordHash);
 }
 
-const secret = 'zolasproperty';
+const secret = process.env.SECRET_KEY;
 
 const getJWT = function (uid) {
     const token = jwt.sign({
@@ -47,14 +47,12 @@ async function autheticateByJWT(req, res, next) {
 
 async function getUserByUid(uid) {
     const user = await User.getUserByUid(uid);
-    console.log(user);
     return user;
 }
 
 async function userRegister({ username, email, password }) {
     const hashedPwd = await hashPassword(password);
     const user = await User.createUser(username, email, hashedPwd);
-    console.log(user, hashedPwd);
 }
 
 async function userLogin({ username, password }) {

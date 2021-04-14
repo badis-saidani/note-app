@@ -12,7 +12,6 @@ router.get('/', authRepository.autheticateByJWT, async (req, res, next) => {
 })
 
 router.post('/login', async (req, res, next) => {
-    console.log('you called me! , ', req.body);
     try {
         const { username, password } = req.body;
         const userInfo = await authRepository.userLogin({ username, password });

@@ -2,7 +2,6 @@ const User = require('../models/user');
 
 async function getNoteContent(uid, notebookName, noteTitle, callback){
     let content = await User.getNoteContent(uid, notebookName, noteTitle);
-    console.log(content);
     callback(content);
 }
 

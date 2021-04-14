@@ -5,7 +5,6 @@ const nodeRepository = require('../repository/noteRepository');
 
 router.get("/", async (req, res) => {
     let uid = req.jwt.uid;
-    console.log(uid);
     setImmediate(() => {
         notebookRepo.getNoteBooks(uid, (result) => {
             res.json(result);
