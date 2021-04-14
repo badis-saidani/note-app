@@ -14,8 +14,7 @@
       <mat-grid-list cols="4" rowHeight="1:1">
         <mat-grid-tile  *ngFor="let r of (reminders$ | async)?.reminders">
           <mat-card  [routerLink]="[r._id]" [state]="r" class="example-card pointer">
-            <!-- <mat-icon (click)="delete(r)"  style="float: right;" aria-hidden="false" aria-label="Example home icon" color="warn">delete</mat-icon> -->
-            <button #trash (click)="delete(r, $event)" style="float: right;" mat-mini-fab color="warn">
+             <button #trash (click)="delete(r, $event)" style="float: right;" mat-mini-fab color="warn">
               <mat-icon>delete</mat-icon>
             </button>
             <mat-card-header >
@@ -37,7 +36,3 @@
   </div>
 
 </div>
-
-<!-- <ng-template #loading>
-    <div>Loading...</div>
-</ng-template> -->

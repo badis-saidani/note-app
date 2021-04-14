@@ -53,15 +53,16 @@ export class ReminderDetailsComponent implements OnInit {
   }
 
   submit(){
+    console.log(this.option);
+
     const rem = {
-      // _id: this.reminder._id,
+      _id: this.reminder._id,
       title : this.reminderForm.value.title,
       content : this.reminderForm.value.content,
       created_at: this.reminder.created_at,
       set_at: this.reminder.set_at,
       updated_at: new Date()
     }
-
     console.log('rem: ',rem);
 
     const obs = (this.option==='new')?
@@ -76,7 +77,6 @@ export class ReminderDetailsComponent implements OnInit {
   }
 
   setReminderTimeAt(event: MatDatepickerInputEvent<Date>) {
-    // this.reminderForm.setValue(['set_at'], event.value)  ;
     console.log('change date: ', event.value);
     this.reminder.set_at = event.value;
   }

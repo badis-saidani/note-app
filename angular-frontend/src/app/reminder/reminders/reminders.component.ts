@@ -16,11 +16,12 @@ export class RemindersComponent implements OnInit {
      private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    console.log('inside remider compo');
-
-    this.getReminders();
+   this.getReminders();
   }
 
+  ngOnDestroy() {
+    this.reminders$.unsubscribe();
+  }
   getReminders() {
     this.reminders$ = this.service.getReminders();
 

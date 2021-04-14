@@ -14,13 +14,19 @@
   </header>
 
   <form [formGroup] = "reminderForm" (ngSubmit)="submit()" class="example-container centered">
+    <mat-vertical-stepper [linear]="true" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Fill out your reminder title</ng-template>
     <mat-form-field hintLabel="Max 25 characters" appearance="outline">
         <mat-label>Reminder Title</mat-label>
         <input id="title" formControlName="title"
          matInput #input maxlength="25" placeholder="Ex. Nougat" [value]="reminder?.title" >
         <mat-hint align="end">{{input.value?.length || 0}}/25</mat-hint>
       </mat-form-field>
+      </mat-step>
 
+      <mat-step>
+        <ng-template matStepLabel>Set up the date and time</ng-template>
       <mat-form-field class="example-full-width" appearance="fill">
           <input matInput
           (dateInput)="setReminderTimeAt($event)"
@@ -30,14 +36,26 @@
 
     <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
         </mat-form-field>
+</mat-step>
 
+<mat-step>
+  <ng-template matStepLabel>Fill out the description</ng-template>
       <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
           <textarea rows="20" matInput formControlName='content'>{{reminder?.content}}</textarea>
       </mat-form-field>
-      <button class='submit' type="submit" mat-raised-button color="primary" [disabled]="!reminderForm.valid" >Save</button>
+    </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Save</ng-template>
+        <button class='submit' type="submit" mat-raised-button color="primary" [disabled]="!reminderForm.valid" >Save</button>
+
+      </mat-step>
+
+  </mat-vertical-stepper>
     </form>
-</div>
+
+
+  </div>
 
 
 

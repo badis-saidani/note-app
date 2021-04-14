@@ -12,16 +12,17 @@
 
 
   .example-large-box {
-    /* display: flex; */
-    /* align-items: center;
-    justify-content: center; */
     margin: 16px;
     padding: 16px;
     border-radius: 8px;
-    /* height: 700px;
-    width: 600px; */
   }
 
   header {
     float: left;
+  }
+  mat-vertical-stepper{
+    width: 100%;
+  }
+  mat-form-field{
+    padding-top: 5px;
   }
