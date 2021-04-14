@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NoteService } from '../note.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -21,11 +21,29 @@ export class NoteComponent implements OnInit {
   @ViewChild('inputContent') inputContent : ElementRef;
 
 
-  constructor(private renderer:  Renderer2,
+  constructor(
+            private _activatedRoute: ActivatedRoute,
+            private router: Router,
+            private renderer:  Renderer2, 
             private noteService: NoteService,
-            private dialog: MatDialog)
-  {
-    this.currentNotebook = "master";
+            )
+  {  
+    try {
+      this.currentNotebook = this.router.getCurrentNavigation().extras.state.notebook;
+    }
+    catch(ex){
+      this.currentNotebook = "master";
+    }
+    console.log("this.currentNotebook: " + this.currentNotebook);
+
+    this._activatedRoute.queryParams.subscribe(
+      params => {
+        this.currentNotebook = params['notebook'];
+        console.log('queryParams', this.currentNotebook);
+        this.getAllNotes();
+      }
+    );
+
     this.noteItem = null;
   }
 
@@ -33,7 +51,7 @@ export class NoteComponent implements OnInit {
     this.getAllNotes();
   }
 
-  getAllNotes(){
+  getAllNotes(){    
     this.noteService.getNotes().subscribe(
       res => {
         let notebook = res.find(ele => ele.name == this.currentNotebook);
@@ -54,11 +72,11 @@ export class NoteComponent implements OnInit {
   }
 
   getNoteContent(noteTitle: string){
-    this.currentNote = noteTitle;
+    this.currentNote = noteTitle;    
     this.noteService.getNoteContent(this.currentNotebook, this.currentNote)
               .subscribe(
                 res => {
-                  this.noteItem = res;
+                  this.noteItem = res;                  
                 },
                 err => {
                   this.currentNote = null;
@@ -85,7 +103,7 @@ export class NoteComponent implements OnInit {
     }
 
     if (!this.currentNote){ //add new
-
+      
       this.noteService.addNote(this.currentNotebook, payload).subscribe(
         res => {
           this.refeshDataAfterUpsert(res, payload.title);
@@ -119,7 +137,7 @@ export class NoteComponent implements OnInit {
       res => {
         this.createNote();
         console.log(res);
-        this.getAllNotes();
+        this.getAllNotes();        
       },
       err => this.handleError(err),
     );

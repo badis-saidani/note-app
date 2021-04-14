@@ -10,18 +10,22 @@ export class NotebookService {
   domain: string = "http://localhost:3000/api";
   constructor(private http: HttpClient, private authService : AuthService){}
 
-  buildHeader(){
-    return { headers: { 
-              'x-access-token': this.authService.token, 
-              'Content-Type': 'application/json' 
-              }
-          };
-  }
-
   getNoteBooks(){
     let endPoint = this.domain + "/notebooks";
     
-    return this.http.get(endPoint, this.buildHeader())
+    return this.http.get(endPoint)
+      .pipe(map((res: any) => res));
+  }
+
+  addNoteBook(payload: object){
+    let endPoint = this.domain + "/notebooks";
+    return this.http.post(endPoint, payload)
+      .pipe(map((res: any) => res));
+  }
+
+  deleteNoteBook(name){
+    let endPoint = this.domain + "/notebooks/" + name;
+    return this.http.delete(endPoint)
       .pipe(map((res: any) => res));
   }
 

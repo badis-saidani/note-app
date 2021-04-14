@@ -19,7 +19,7 @@ const notebookRoute: Routes = [
 @NgModule({
   declarations: [
     NotebookComponent,
-    NoteComponent
+    NoteComponent,    
   ],
   imports: [
     CommonModule,
@@ -30,6 +30,6 @@ const notebookRoute: Routes = [
     HttpClientModule,
     RouterModule.forChild(notebookRoute)
   ],
-  exports: [NotebookComponent]
+  exports: [NoteComponent]
 })
 export class NotebookModule { }

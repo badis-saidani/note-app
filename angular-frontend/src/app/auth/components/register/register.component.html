@@ -19,5 +19,6 @@
         </a>
     </div>
     <ngb-alert *ngIf="errorMessage" class="mt-2" type="danger" (closed)="alertClose()">{{ errorMessage }}</ngb-alert>
+    <ngb-alert *ngIf="successMessage" class="mt-2" type="success" (closed)="alertClose()">{{ successMessage }}</ngb-alert>
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
 </form>
