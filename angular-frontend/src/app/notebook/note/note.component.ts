@@ -1,6 +1,7 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NoteService } from '../note.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -9,8 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.css']
 })
-export class NoteComponent implements OnInit {
-
+export class NoteComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   currentNotebook: string;
   currentNote: string;
 
@@ -46,13 +47,16 @@ export class NoteComponent implements OnInit {
 
     this.noteItem = null;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.getAllNotes();
   }
 
   getAllNotes(){    
-    this.noteService.getNotes().subscribe(
+    this.subscription = this.noteService.getNotes().subscribe(
       res => {
         let notebook = res.find(ele => ele.name == this.currentNotebook);
         if (notebook.notes){
@@ -73,7 +77,7 @@ export class NoteComponent implements OnInit {
 
   getNoteContent(noteTitle: string){
     this.currentNote = noteTitle;    
-    this.noteService.getNoteContent(this.currentNotebook, this.currentNote)
+    this.subscription = this.noteService.getNoteContent(this.currentNotebook, this.currentNote)
               .subscribe(
                 res => {
                   this.noteItem = res;                  
@@ -104,7 +108,7 @@ export class NoteComponent implements OnInit {
 
     if (!this.currentNote){ //add new
       
-      this.noteService.addNote(this.currentNotebook, payload).subscribe(
+      this.subscription = this.noteService.addNote(this.currentNotebook, payload).subscribe(
         res => {
           this.refeshDataAfterUpsert(res, payload.title);
         },
@@ -114,7 +118,7 @@ export class NoteComponent implements OnInit {
     else { //update
       if (!this.openDialog(`Do you want to update ${this.currentNote} note?`)) return;
 
-      this.noteService.updateNote(this.currentNotebook, this.currentNote, payload).subscribe(
+      this.subscription = this.noteService.updateNote(this.currentNotebook, this.currentNote, payload).subscribe(
         res => {
           this.refeshDataAfterUpsert(res, payload.title);
         },
@@ -133,7 +137,7 @@ export class NoteComponent implements OnInit {
     if (this.currentNote == null) return;
     if (!this.openDialog(`Do you want to delete ${this.currentNote} note?`)) return;
 
-    this.noteService.deleteNote(this.currentNotebook, this.currentNote).subscribe(
+    this.subscription = this.noteService.deleteNote(this.currentNotebook, this.currentNote).subscribe(
       res => {
         this.createNote();
         console.log(res);
